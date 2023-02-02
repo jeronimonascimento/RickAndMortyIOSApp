@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Controller para configurar o app
 final class RMSettingsViewController: UIViewController {
 
     override func viewDidLoad() {

@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Controller para buscar dados dos personagens
 final class RMCharacterViewController: UIViewController {
 
     override func viewDidLoad() {
