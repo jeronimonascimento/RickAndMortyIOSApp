@@ -21,8 +21,11 @@ final class RMService {
     /// Enviar Requisição
     /// - Parameters:
     ///   - request: Requisição
+    ///   - type: Tipo esperado do objeto que esperamos receber de volta
     ///   - completion: callback com dados ou com erro
-    public func execute(_ request:RMRequest, completion: @escaping() -> Void) {
+    public func execute<T: Codable>(_ request: RMRequest,
+                                    expecting type: T.Type,
+                                    completion: @escaping(Result<T, Error>) -> Void) {
         
     }
 }
