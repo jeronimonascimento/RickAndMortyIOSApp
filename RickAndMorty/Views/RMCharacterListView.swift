@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol RMCharacterListViewDelegate: AnyObject {
+    func rmCharacterListView(_ listView: RMCharacterListView, _ character: RMCharacter)
+}
 
 /// View que trata a exibição dos characters
 final class RMCharacterListView: UIView {
+    
+    public weak var delegate: RMCharacterListViewDelegate?
     
     let viewModel = RMCharacterListViewModel()
     
@@ -22,9 +27,12 @@ final class RMCharacterListView: UIView {
     
     private var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10)
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(RMCharacterListLoadingFooterView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+                                withReuseIdentifier: RMCharacterListLoadingFooterView.identifier)
         collectionView.register(RMCharacterCollectionViewCell.self, forCellWithReuseIdentifier: RMCharacterCollectionViewCell.cellIdentifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.isHidden = true
@@ -38,21 +46,15 @@ final class RMCharacterListView: UIView {
         addSubviews(collectionView, spinner)
         setupConstraints()
         spinner.startAnimating()
+        viewModel.delegate = self
         viewModel.fetchCharacters()
         setupCollectionView()
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: {
-            self.spinner.stopAnimating()
-            self.collectionView.isHidden = false
-            UIView.animate(withDuration: 0.4) {
-                self.collectionView.alpha = 1
-            }
-        })
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            spinner.topAnchor.constraint(equalTo: topAnchor),
-            spinner.rightAnchor.constraint(equalTo: rightAnchor),
+            spinner.widthAnchor.constraint(equalToConstant: 100),
+            spinner.heightAnchor.constraint(equalToConstant: 100),
             spinner.centerXAnchor.constraint(equalTo: centerXAnchor),
             spinner.centerYAnchor.constraint(equalTo: centerYAnchor),
             
@@ -70,5 +72,28 @@ final class RMCharacterListView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("Unsupported")
+    }
+}
+
+
+extension RMCharacterListView: RMCharacterListViewModelDelegate {
+    func didLoadInitialCharacters() {
+        spinner.stopAnimating()
+        collectionView.isHidden = false
+        UIView.animate(withDuration: 0.4) {
+            self.collectionView.alpha = 1
+        }
+        
+        collectionView.reloadData()
+    }
+    
+    func didLoadMoreCharacters(with newIndexPaths: [IndexPath]) {
+        collectionView.performBatchUpdates {
+            self.collectionView.insertItems(at: newIndexPaths)
+        }
+    }
+    
+    func didSelectCharacter(_ character: RMCharacter) {
+        delegate?.rmCharacterListView(self, character)
     }
 }

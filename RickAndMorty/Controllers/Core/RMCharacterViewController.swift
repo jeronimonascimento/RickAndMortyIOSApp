@@ -8,10 +8,11 @@
 import UIKit
 
 /// Controller para buscar dados dos personagens
-final class RMCharacterViewController: UIViewController {
+final class RMCharacterViewController: UIViewController, RMCharacterListViewDelegate {
     
-    private let characterListView: RMCharacterListView = {
+    private lazy var characterListView: RMCharacterListView = {
         let characterListView = RMCharacterListView()
+        characterListView.delegate = self
         characterListView.translatesAutoresizingMaskIntoConstraints = false
         return characterListView
     }()
@@ -32,6 +33,14 @@ final class RMCharacterViewController: UIViewController {
             characterListView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             characterListView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor)
         ])
+    }
+    
+    // MARK: - RMCharacterListViewDelegate
+    
+    func rmCharacterListView(_ listView: RMCharacterListView, _ character: RMCharacter) {
+        let viewModel = RMCharacterDetailViewViewModel(character: character)
+        let detailVC = RMCharacterDetailViewController(viewModel: viewModel)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
     
 }
