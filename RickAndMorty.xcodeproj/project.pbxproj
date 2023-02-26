@@ -35,6 +35,7 @@
 		1EB2DA4829A2E7D800358B0D /* RMCharacterDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB2DA4729A2E7D800358B0D /* RMCharacterDetailViewController.swift */; };
 		1EB2DA4A29A2E84800358B0D /* RMCharacterDetailViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB2DA4929A2E84800358B0D /* RMCharacterDetailViewViewModel.swift */; };
 		1EB2DA4C29A5459D00358B0D /* RMCharacterListLoadingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB2DA4B29A5459D00358B0D /* RMCharacterListLoadingFooterView.swift */; };
+		1EB2DA4E29AAE83200358B0D /* RMImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB2DA4D29AAE83200358B0D /* RMImageLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		1EB2DA4729A2E7D800358B0D /* RMCharacterDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMCharacterDetailViewController.swift; sourceTree = "<group>"; };
 		1EB2DA4929A2E84800358B0D /* RMCharacterDetailViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMCharacterDetailViewViewModel.swift; sourceTree = "<group>"; };
 		1EB2DA4B29A5459D00358B0D /* RMCharacterListLoadingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMCharacterListLoadingFooterView.swift; sourceTree = "<group>"; };
+		1EB2DA4D29AAE83200358B0D /* RMImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMImageLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 		1EB2DA19298B2DC700358B0D /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				1EB2DA4D29AAE83200358B0D /* RMImageLoader.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				1EB2DA312990261500358B0D /* RMOrigin.swift in Sources */,
 				1EB2DA33299026AB00358B0D /* RMSingleLocation.swift in Sources */,
 				1EB2DA3F2990964600358B0D /* RMCharacterListView.swift in Sources */,
+				1EB2DA4E29AAE83200358B0D /* RMImageLoader.swift in Sources */,
 				1EB2DA3B2990628000358B0D /* RMGetAllCharactersResponse.swift in Sources */,
 				1EB2DA352990278200358B0D /* RMCharacterStatus.swift in Sources */,
 				1EB2DA37299027A100358B0D /* RMCharacterGender.swift in Sources */,
