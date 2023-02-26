@@ -91,8 +91,13 @@ final class RMRequest {
             let components = trimmedUrl.components(separatedBy: "/")
             if !components.isEmpty {
                 let endpointString = components[0]
+                var pathComponents: [String] = []
+                if components.count > 1 {
+                    pathComponents = components
+                    pathComponents.removeFirst()
+                }
                 if let rmEndpont = RMEndpoint(rawValue: endpointString) {
-                    self.init(endpoint: rmEndpont)
+                    self.init(endpoint: rmEndpont, pathComponents: pathComponents)
                     return
                 }
             }
