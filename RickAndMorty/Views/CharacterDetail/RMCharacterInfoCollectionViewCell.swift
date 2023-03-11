@@ -56,13 +56,13 @@ final class RMCharacterInfoCollectionViewCell: UICollectionViewCell {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 25),
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 35),
             imageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
             imageView.heightAnchor.constraint(equalToConstant: 30),
             imageView.heightAnchor.constraint(equalToConstant: 30),
             
             valueLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-            valueLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 15),
+            valueLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 10),
             valueLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10),
             valueLabel.bottomAnchor.constraint(equalTo: titleContainerView.topAnchor),
             
