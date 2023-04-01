@@ -18,7 +18,7 @@ final class RMRequest {
     
     
     /// Endpoint desejado
-    private let endpoint: RMEndpoint
+    let endpoint: RMEndpoint
     
     
     /// Path varibles da URM
@@ -129,4 +129,5 @@ final class RMRequest {
 
 extension RMRequest {
     static let listCharactersRequest = RMRequest(endpoint: .character)
+    static let listEpisodesRequest = RMRequest(endpoint: .episode)
 }

@@ -8,14 +8,16 @@
 import UIKit
 
 /// VC para detalhar episódio selecionado
-final class RMEpisodeDetailViewController: UIViewController {
+final class RMEpisodeDetailViewController: UIViewController, RMEpisodeDetailViewViewModelDelegate {
+   
+    private let viewModel: RMEpisodeDetailViewViewModel
     
-    private let url: URL?
+    private let detailView = RMEpisodeDetailView()
     
     //MARK: - Init
     
     public init(url: URL?) {
-        self.url = url
+        self.viewModel = .init(endpointUrl: url)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -23,15 +25,41 @@ final class RMEpisodeDetailViewController: UIViewController {
         fatalError("Unsupported")
     }
     
-    
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubviews(detailView)
+        addShareButton()
+        addConstraints()
         title = "Episode"
-        view.backgroundColor = .systemCyan
-
-        // Do any additional setup after loading the view.
+        viewModel.delegate = self
+        viewModel.fetchEpisodeData()
     }
 
+    // MARK: - Private
+    
+    private func addConstraints() {
+        NSLayoutConstraint.activate([
+            detailView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            detailView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            detailView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            detailView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+        ])
+    }
+    
+    private func addShareButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action,
+                                                            target: self,
+                                                            action: #selector(didTapShare))
+    }
+    
+    @objc
+    private func didTapShare() { }
+    
+    // MARK: - Delegate
+    
+    func didFetchEpisodeDatails() {
+        detailView.configure(with: viewModel)
+    }
 }

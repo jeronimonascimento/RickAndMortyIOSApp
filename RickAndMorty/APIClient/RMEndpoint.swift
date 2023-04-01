@@ -8,7 +8,7 @@
 import Foundation
 
 /// Representa um endpoint
-@frozen enum RMEndpoint: String {
+@frozen enum RMEndpoint: String, Hashable, CaseIterable {
     /// Endpoint para recuperar dados do personagem
     case character
     /// Endpoint para recuperar dados da localização
